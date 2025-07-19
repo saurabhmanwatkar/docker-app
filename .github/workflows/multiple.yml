@@ -21,5 +21,12 @@ jobs:
 
     runs-on: ubuntu-latest
     needs: build
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]
     steps:
-    - run: echo "Build Parallel"
+    - uses: actions/setup-nodes@v4
+      with:
+        node-verison: ${{matrix.node-version }}
+    - run: npm install
+    - run: npm test
